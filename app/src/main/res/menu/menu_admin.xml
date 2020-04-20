@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/seeOrdersInProcess"
+        android:orderInCategory="100"
+        android:title="@string/see_orders_in_process"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/seeAcceptedOrders"
+        android:orderInCategory="100"
+        android:title="@string/see_accepted_orders"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/seeRejectedOrders"
+        android:orderInCategory="100"
+        android:title="@string/see_rejected_orders"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/editProfile"
+        android:orderInCategory="100"
+        android:title="@string/edit_profile"
+        app:showAsAction="never" />
+
+</menu>
