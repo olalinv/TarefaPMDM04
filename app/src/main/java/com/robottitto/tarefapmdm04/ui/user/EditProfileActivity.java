@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
 import com.robottitto.tarefapmdm04.R;
@@ -137,8 +139,9 @@ public class EditProfileActivity extends CameraUtil {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void loadImage() {
-        pedirPermiso();
+        requestPermission();
         final CharSequence[] opciones = {"Tomar Foto", "Cargar Imagen", "Cancelar"};
         final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(EditProfileActivity.this);
         alertOpciones.setTitle("Seleccione una opción");

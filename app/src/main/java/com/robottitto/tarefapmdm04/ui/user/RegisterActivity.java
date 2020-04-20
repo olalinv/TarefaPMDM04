@@ -2,6 +2,7 @@ package com.robottitto.tarefapmdm04.ui.user;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
 import com.robottitto.tarefapmdm04.R;
@@ -86,7 +88,6 @@ public class RegisterActivity extends CameraUtil {
                     User user = new User(name, surname, email, username, password, role, image);
                     try {
                         long result = userModelService.addUser(user);
-                        // List<User> users = userModelService.getUsers();
                         if (result > 0) {
                             showToast(getString(R.string.user_created));
                             showToast(userModelService.getUser(user.getUsername()).toString());
@@ -103,18 +104,19 @@ public class RegisterActivity extends CameraUtil {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void loadImage() {
-        pedirPermiso();
-        final CharSequence[] opciones = {"Tomar Foto", "Cargar Imagen", "Cancelar"};
-        final AlertDialog.Builder alertOpciones = new AlertDialog.Builder(RegisterActivity.this);
-        alertOpciones.setTitle("Seleccione una opción");
-        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+        requestPermission();
+        final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.load_image), getString(R.string.cancel)};
+        final AlertDialog.Builder alertOptions = new AlertDialog.Builder(RegisterActivity.this);
+        alertOptions.setTitle(getString(R.string.choose_option));
+        alertOptions.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (opciones[i].equals("Tomar Foto")) {
+                if (options[i].equals(getString(R.string.take_photo))) {
                     loadImageFromCamera();
                 } else {
-                    if (opciones[i].equals("Cargar Imagen")) {
+                    if (options[i].equals(getString(R.string.load_image))) {
                         loadImageFromSD();
                     } else {
                         dialogInterface.dismiss();
@@ -122,7 +124,7 @@ public class RegisterActivity extends CameraUtil {
                 }
             }
         });
-        alertOpciones.show();
+        alertOptions.show();
     }
 
     private void go(Class<?> activityClass, String paramId, String paramValue) {

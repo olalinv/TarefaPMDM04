@@ -4,6 +4,7 @@
     <string name="app_name">Tarefa PMDM04</string>
     <string name="cancel">Cancelar</string>
     <string name="category">Categoría</string>
+    <string name="choose_option">Elixa unha opción</string>
     <string name="city">Cidade</string>
     <string name="confirm_order">Confirmar pedido</string>
     <string name="create_account">Crear conta</string>
@@ -15,6 +16,7 @@
     <string name="error_empty_fields">Hai campos baleiros</string>
     <string name="error_invalid_credentials">Credenciais non válidas</string>
     <string name="error_password_not_match">Os contrasinais non coinciden</string>
+    <string name="error_permission_needed">Permiso necesario</string>
     <string name="finish">Finalizar</string>
     <string name="id">Id</string>
     <string name="load_image">Cargar imaxe</string>
@@ -36,6 +38,7 @@
     <string name="result_order_accepted">Aceptouse o pedido</string>
     <string name="result_order_rejected">Rechazouse o pedido</string>
     <string name="role">Rol</string>
+    <string name="take_photo">Facer foto</string>
     <string name="quantity">Cantidade</string>
     <string name="save">Gardar</string>
     <string name="see_accepted_orders">Ver pedidos aceptados</string>

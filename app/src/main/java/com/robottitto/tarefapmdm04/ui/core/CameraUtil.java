@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -30,15 +31,6 @@ public class CameraUtil extends AppCompatActivity {
     private final static int PICK_IMAGE = 10;
     private final static int CAPTURE_IMAGE = 11;
     private static String path;
-
-    /*
-     *  Solicitud de permisos
-     */
-    public void pedirPermiso() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, CAMERA}, WRITE_STORAGE);
-        }
-    }
 
     public void loadImageFromSD() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -65,23 +57,9 @@ public class CameraUtil extends AppCompatActivity {
         startActivityForResult(intent, CAPTURE_IMAGE);
     }
 
-    /*
-     *  Resultado de la solicitud de permisos
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == WRITE_STORAGE) {
-            Button btn = findViewById(R.id.btLoadImage);
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permisos concedidos, habilitamos botón
-                btn.setEnabled(true);
-                //Toast.makeText(this,"PERMISOS CONCEDIDOS",Toast.LENGTH_SHORT).show();
-            } else {
-                // Permisos denegados, deshabilitamos botón
-                btn.setEnabled(false);
-                Toast.makeText(this, "NECESITAS PERMISOS", Toast.LENGTH_SHORT).show();
-            }
-        }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void requestPermission() {
+        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, CAMERA}, WRITE_STORAGE);
     }
 
     @Override
@@ -106,6 +84,19 @@ public class CameraUtil extends AppCompatActivity {
                     break;
                 default:
                     // Default
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == WRITE_STORAGE) {
+            Button btn = findViewById(R.id.btLoadImage);
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                btn.setEnabled(true);
+            } else {
+                btn.setEnabled(false);
+                Toast.makeText(this, getString(R.string.error_permission_needed), Toast.LENGTH_SHORT).show();
             }
         }
     }

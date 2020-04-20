@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.user.EditProfileActivity"></activity>
+        <activity
+            android:name=".ui.user.EditProfileActivity"
+            android:parentActivityName=".ui.user.ProfileActivity"></activity>
         <activity
             android:name=".ui.order.PendingOrdersActivity"
             android:parentActivityName=".ui.user.ProfileActivity" />
